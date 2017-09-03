@@ -1,4 +1,6 @@
 #include <iostream>
+#include <QStringList>
+#include <QFileInfo>
 #include "fileholder.h"
 
 FileHolder::FileHolder() :
@@ -30,10 +32,22 @@ void FileHolder::setOutputFolder(QString outputFolder)
 
 QString FileHolder::getInputFiles()
 {
-    return inputFiles_.join(", ");
+    QStringList files;
+    QStringListIterator itr(inputFiles_);
+
+    while(itr.hasNext())
+    {
+        files.append(pickupFileName(itr.next()));
+    }
+    return files.join(", ");
 }
 
 QString FileHolder::getOutputFolder()
 {
     return outputFolder_;
+}
+
+QString FileHolder::pickupFileName(QString filenameWithPath)
+{
+    return QFileInfo(filenameWithPath).fileName();
 }

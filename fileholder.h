@@ -16,7 +16,8 @@ public:
     QString getInputFiles();
     QString getOutputFolder();
 
-private:
+protected:
+    QString pickupFileName(QString filenameWithPath);
     QStringList inputFiles_;
     QString inputFolder_;
     QString outputFolder_;
